@@ -1,0 +1,13 @@
+default partial alphanumeric_keys
+xkb_symbols "basic" {
+    include "us"
+    name[Group1]= "US with Control/Super swap";
+    
+    replace key <LCTL> { [ Super_L ] };
+    replace key <LWIN> { [ Control_L ] };
+    replace key <RCTL> { [ Super_R ] };
+    replace key <RWIN> { [ Control_R ] };
+    
+    modifier_map Control { Super_L, Super_R };
+    modifier_map Mod4    { Control_L, Control_R };
+};
