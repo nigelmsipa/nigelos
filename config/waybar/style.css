@@ -92,13 +92,23 @@ button:hover {
 #network,
 #cpu,
 #memory,
-#battery {
+#battery,
+#custom-lock {
   background-color: rgba(30, 30, 46, 0.8);
   border-radius: 15px;
   padding: 5px 10px;
   margin: 0px 3px;
   color: @text;
   font-size: 12px;
+}
+
+#custom-lock {
+  color: @text;
+  font-size: 14px;
+}
+
+#custom-lock:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 #battery.charging,

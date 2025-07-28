@@ -9,7 +9,7 @@
     
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "battery", "custom/lock"],
 
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -28,13 +28,16 @@
 
     "cpu": {
         "format": "󰻠 {usage}%",
-        "tooltip": false,
-        "interval": 2
+        "tooltip": true,
+        "tooltip-format": "CPU: {usage}%",
+        "interval": 3,
+        "on-click": "gnome-system-monitor"
     },
 
     "memory": {
         "format": "󰍛 {}%",
-        "tooltip-format": "{used:0.1f}G/{total:0.1f}G used"
+        "tooltip-format": "{used:0.1f}G/{total:0.1f}G used",
+        "on-click": "gnome-system-monitor"
     },
 
     "battery": {
@@ -71,5 +74,11 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
+    },
+
+    "custom/lock": {
+        "format": "󰌾",
+        "tooltip": "Lock Screen",
+        "on-click": "swaylock -f -c 0F0017"
     }
 }
