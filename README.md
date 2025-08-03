@@ -1,4 +1,5 @@
-# Nigel OS - AI-Enhanced Hyprland Setup
+# Nigel OS - AI-Enhanced Hyprland Setup for the futur
+
 
 A beautiful, efficient Linux desktop environment with integrated AI capabilities.
 
