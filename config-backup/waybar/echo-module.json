@@ -1,0 +1,11 @@
+{
+    "echo": {
+        "exec": "cat /tmp/echo_waybar_status.json 2>/dev/null || echo '{\"text\":\"🎤 Ready\",\"class\":\"idle\",\"tooltip\":\"Echo: Press and hold Right Ctrl to record\"}'",
+        "return-type": "json",
+        "interval": 1,
+        "on-click": "/home/nigel/echo/scripts/echo-gui toggle",
+        "on-click-right": "/home/nigel/echo/scripts/echo-gui gui",
+        "format": "{}",
+        "tooltip": true
+    }
+}

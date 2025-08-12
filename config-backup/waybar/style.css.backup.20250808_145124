@@ -1,0 +1,131 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+}
+
+/* Left island - fully rounded */
+#workspaces {
+    background-color: rgba(30, 30, 46, 0.9);
+    border-radius: 15px;
+    padding: 5px 15px;
+    margin: 0;
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    margin: 0px 2px;
+    background-color: transparent;
+    color: #cdd6f4;
+    border-radius: 50%;
+    min-width: 0;
+    font-size: 12px;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#workspaces button.active {
+    background-color: white;
+    color: #1e1e2e;
+    border-radius: 50%;
+}
+
+#workspaces button.urgent {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+
+/* Center notch - smaller pill shape */
+#clock {
+    background-color: rgba(30, 30, 46, 0.9);
+    border-radius: 15px;
+    padding: 5px 20px;
+    color: #cdd6f4;
+    font-weight: 600;
+}
+
+/* Right island - fully rounded with all your modules */
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#battery,
+#custom-lock {
+    background-color: rgba(30, 30, 46, 0.9);
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 0px 3px;
+    color: #cdd6f4;
+    font-size: 12px;
+}
+
+#custom-lock {
+    color: #cdd6f4;
+    font-size: 14px;
+}
+
+#custom-lock:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #74c7ec;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+
+#pulseaudio.muted {
+    color: #6c7086;
+}
+
+/* Echo Speech-to-Text Module */
+#custom-echo {
+    padding: 0 10px;
+    margin: 0 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    background-color: rgba(30, 30, 46, 0.9);
+    color: #cdd6f4;
+}
+
+#custom-echo.active {
+    background-color: #a6e3a1;
+    color: #1e1e2e;
+    animation: pulse 2s infinite;
+}
+
+#custom-echo.inactive {
+    background-color: rgba(108, 112, 134, 0.5);
+    color: #6c7086;
+}
+
+#custom-echo:hover {
+    background-color: #89b4fa;
+    color: #1e1e2e;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}

@@ -1,0 +1,200 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 11px;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 0;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+}
+
+/* Boxy workspaces - sharp corners */
+#workspaces {
+    background-color: rgba(20, 20, 30, 0.95);
+    border: 1px solid rgba(60, 60, 80, 0.8);
+    border-radius: 0;
+    padding: 4px 8px;
+    margin: 0;
+}
+
+#workspaces button {
+    padding: 2px 8px;
+    margin: 0px 1px;
+    background-color: transparent;
+    color: #a0a0b0;
+    border-radius: 0;
+    min-width: 20px;
+    font-size: 11px;
+    border: 1px solid transparent;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(100, 100, 120, 0.5);
+}
+
+#workspaces button.active {
+    background-color: rgba(80, 120, 200, 0.8);
+    color: #ffffff;
+    border: 1px solid rgba(100, 140, 220, 0.9);
+    border-radius: 0;
+}
+
+#workspaces button.urgent {
+    background-color: rgba(220, 80, 80, 0.8);
+    color: #ffffff;
+    border: 1px solid rgba(240, 100, 100, 0.9);
+}
+
+/* Boxy clock - minimal and sharp */
+#clock {
+    background-color: rgba(20, 20, 30, 0.95);
+    border: 1px solid rgba(60, 60, 80, 0.8);
+    border-radius: 0;
+    padding: 4px 12px;
+    color: #e0e0e0;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+/* Boxy modules - all sharp corners and minimal spacing */
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#battery,
+#custom-lock {
+    background-color: rgba(20, 20, 30, 0.95);
+    border: 1px solid rgba(60, 60, 80, 0.8);
+    border-radius: 0;
+    padding: 4px 8px;
+    margin: 0px 1px;
+    color: #c0c0d0;
+    font-size: 11px;
+}
+
+#custom-lock {
+    color: #c0c0d0;
+    font-size: 12px;
+    padding: 4px 6px;
+}
+
+#custom-lock:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(100, 100, 120, 0.5);
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #60c0ff;
+    border-color: rgba(96, 192, 255, 0.3);
+}
+
+#battery.critical:not(.charging) {
+    background-color: rgba(220, 80, 80, 0.8);
+    color: #ffffff;
+    border-color: rgba(240, 100, 100, 0.9);
+}
+
+#pulseaudio.muted {
+    color: #606070;
+}
+
+#cpu {
+    color: #ff9060;
+}
+
+#memory {
+    color: #60ff90;
+}
+
+#network {
+    color: #9060ff;
+}
+
+#pulseaudio {
+    color: #ffff60;
+}
+
+/* Echo module boxy styles */
+#custom-echo {
+    background-color: rgba(20, 20, 30, 0.95);
+    border: 1px solid rgba(60, 60, 80, 0.8);
+    border-radius: 0;
+    padding: 4px 8px;
+    margin: 0px 1px;
+    color: #c0c0d0;
+    font-size: 11px;
+}
+
+#custom-echo.ready {
+    color: #60ff90;
+    border-color: rgba(96, 255, 144, 0.3);
+}
+
+#custom-echo.recording {
+    color: #ff6090;
+    border-color: rgba(255, 96, 144, 0.5);
+    animation: boxy-pulse 1s infinite;
+}
+
+#custom-echo.processing {
+    color: #ff9060;
+    border-color: rgba(255, 144, 96, 0.5);
+    animation: boxy-glow 2s linear infinite;
+}
+
+#custom-echo.success {
+    color: #60ff90;
+    border-color: rgba(96, 255, 144, 0.7);
+    animation: boxy-flash 0.5s ease-in-out;
+}
+
+#custom-echo.error {
+    color: #ff6060;
+    border-color: rgba(255, 96, 96, 0.7);
+    animation: boxy-shake 0.5s ease-in-out;
+}
+
+@keyframes boxy-pulse {
+    0%, 100% { 
+        background-color: rgba(20, 20, 30, 0.95);
+        border-color: rgba(255, 96, 144, 0.3);
+    }
+    50% { 
+        background-color: rgba(40, 20, 30, 0.95);
+        border-color: rgba(255, 96, 144, 0.8);
+    }
+}
+
+@keyframes boxy-glow {
+    0%, 100% { border-color: rgba(255, 144, 96, 0.3); }
+    50% { border-color: rgba(255, 144, 96, 0.8); }
+}
+
+@keyframes boxy-flash {
+    0%, 100% { 
+        background-color: rgba(20, 20, 30, 0.95);
+        border-color: rgba(96, 255, 144, 0.3);
+    }
+    50% { 
+        background-color: rgba(20, 40, 30, 0.95);
+        border-color: rgba(96, 255, 144, 0.9);
+    }
+}
+
+@keyframes boxy-shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-1px); }
+    75% { transform: translateX(1px); }
+}
