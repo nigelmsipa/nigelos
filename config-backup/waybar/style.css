@@ -2,6 +2,7 @@
     font-family: "JetBrainsMono Nerd Font", monospace;
     font-size: 12px;
     min-height: 0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 window#waybar {
@@ -55,9 +56,16 @@ button:hover {
 #clock {
     background-color: rgba(30, 30, 46, 0.9);
     border-radius: 15px;
-    padding: 5px 20px;
+    padding: 6px 22px;
     color: #cdd6f4;
     font-weight: 600;
+    font-size: 13px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#clock:hover {
+    background-color: rgba(30, 30, 46, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Right island - fully rounded with all your modules */
@@ -73,6 +81,16 @@ button:hover {
     margin: 0px 3px;
     color: #cdd6f4;
     font-size: 12px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+#pulseaudio:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover {
+    background-color: rgba(30, 30, 46, 0.95);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
 }
 
 #custom-lock {
@@ -81,7 +99,9 @@ button:hover {
 }
 
 #custom-lock:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(243, 139, 168, 0.8);
+    color: #1e1e2e;
+    box-shadow: 0 3px 10px rgba(243, 139, 168, 0.3);
 }
 
 #battery.charging,
@@ -98,20 +118,51 @@ button:hover {
     color: #6c7086;
 }
 
+/* State-based styling for system resources */
+#cpu.warning {
+    background-color: rgba(250, 179, 135, 0.8);
+    color: #1e1e2e;
+}
+
+#cpu.critical {
+    background-color: rgba(243, 139, 168, 0.8);
+    color: #1e1e2e;
+    animation: pulse-warning 2s infinite;
+}
+
+#memory.warning {
+    background-color: rgba(250, 179, 135, 0.8);
+    color: #1e1e2e;
+}
+
+#memory.critical {
+    background-color: rgba(243, 139, 168, 0.8);
+    color: #1e1e2e;
+    animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
 /* Echo Speech-to-Text Module */
 #custom-echo {
-    padding: 0 10px;
-    margin: 0 5px;
-    border-radius: 5px;
+    padding: 5px 10px;
+    margin: 0px 3px;
+    border-radius: 15px;
     font-size: 16px;
     background-color: rgba(30, 30, 46, 0.9);
     color: #cdd6f4;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 #custom-echo.active {
     background-color: #a6e3a1;
     color: #1e1e2e;
     animation: pulse 2s infinite;
+    box-shadow: 0 2px 10px rgba(166, 227, 161, 0.3);
 }
 
 #custom-echo.inactive {
@@ -122,6 +173,7 @@ button:hover {
 #custom-echo:hover {
     background-color: #89b4fa;
     color: #1e1e2e;
+    box-shadow: 0 3px 10px rgba(137, 180, 250, 0.3);
 }
 
 @keyframes pulse {
