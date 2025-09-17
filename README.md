@@ -25,7 +25,30 @@ A beautiful, efficient Linux desktop environment with integrated AI capabilities
 - **GPU-accelerated embeddings** for lightning-fast retrieval
 - **ChromaDB vector database** for semantic search
 
-## Quick Start
+## 🚀 Deployment
+
+### New Machine Setup
+```bash
+# Clone the repository
+git clone https://github.com/nigelmsipa/nigelos.git
+cd nigelos
+
+# Run deployment script
+./deploy.sh
+```
+
+The deployment script will:
+- Auto-detect your monitor and username
+- Set up all config files with correct paths
+- Copy applications (wallpaper tools, Echo AI)
+- Create necessary directories
+
+### Manual Setup (if needed)
+1. Copy configs to `~/.config/`
+2. Install dependencies: `hyprland waybar kitty rofi`
+3. Set up wallpapers in `~/Pictures/Wallpapers/`
+
+## 🎯 Quick Start
 
 ### AI Chat
 Press `Alt+I` for instant AI assistance!
@@ -37,9 +60,14 @@ Press `Alt+I` for instant AI assistance!
 - `Alt+1-5` - Workspace switching
 - `Alt+Return` - New terminal
 
-## System Requirements
+## 📋 System Requirements
 - AMD/NVIDIA GPU (tested on RX 6600)
 - Ollama with Phi3/Qwen models
-- Hyprland + Waybar
+- Hyprland + Waybar + Kitty + Rofi
+
+## 📦 Included Applications
+- **Echo AI** - Voice and chat AI assistant
+- **Wallpaper Tools** - Cycling and setting utilities
+- **Smart Configs** - Auto-adapts to your system
 
 Built with ❤️ for efficient AI-powered workflows.
