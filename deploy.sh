@@ -64,12 +64,11 @@ find apps/ -name "*.sh" -exec chmod +x {} \;
 find apps/ -name "*.py" -exec chmod +x {} \;
 find apps/echo/scripts/ -type f -exec chmod +x {} \; 2>/dev/null || true
 
-# Copy default wallpaper if it doesn't exist
-if [ ! -f "$USER_HOME/Pictures/Wallpapers/the_valley.webp" ]; then
-    echo "🖼️  Setting up default wallpaper..."
-    # You'll need to add a default wallpaper to the repo
-    echo "⚠️  Warning: Default wallpaper not found. Please add wallpaper to ~/Pictures/Wallpapers/"
-fi
+# Copy wallpaper collection
+echo "🖼️  Copying wallpaper collection..."
+cp -r wallpapers/* "$USER_HOME/Pictures/Wallpapers/" 2>/dev/null || {
+    echo "⚠️  Note: Some wallpapers may already exist, skipping duplicates"
+}
 
 echo ""
 echo "✅ NigelOS deployment complete!"
