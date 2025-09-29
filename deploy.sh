@@ -47,10 +47,12 @@ echo "⚙️  Deploying configs..."
 # Hyprland configs
 process_template "config/hypr/hyprland.conf" "$USER_HOME/.config/hypr/hyprland.conf"
 process_template "config/hypr/hyprpaper.conf" "$USER_HOME/.config/hypr/hyprpaper.conf"
+mkdir -p "$USER_HOME/.config/hypr/conf.d"
+cp -r config/hypr/conf.d/* "$USER_HOME/.config/hypr/conf.d/" 2>/dev/null || true
 
 # Waybar configs
 process_template "config/waybar/config" "$USER_HOME/.config/waybar/config"
-cp -r config/waybar/style.css "$USER_HOME/.config/waybar/" 2>/dev/null || true
+cp -r config/waybar/style*.css "$USER_HOME/.config/waybar/" 2>/dev/null || true
 
 # Kitty config
 cp -r config/kitty/* "$USER_HOME/.config/kitty/" 2>/dev/null || true
