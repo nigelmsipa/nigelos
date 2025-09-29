@@ -32,4 +32,4 @@ config/*/user-specific-*
 
 # Personal data
 personal/
-private/
+private/apps/echo

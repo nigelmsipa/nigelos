@@ -1,0 +1,3 @@
+[submodule "apps/echo"]
+	path = apps/echo
+	url = git@github.com:nigelmsipa/echo.git
