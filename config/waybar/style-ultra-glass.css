@@ -1,0 +1,215 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12px;
+    min-height: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+}
+
+/* Left island - minimal glass with strong blur */
+#workspaces {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+    padding: 5px 15px;
+    margin: 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    margin: 0px 2px;
+    background-color: transparent;
+    color: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    min-width: 0;
+    font-size: 12px;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+}
+
+#workspaces button.active {
+    background-color: rgba(255, 255, 255, 0.4);
+    color: rgba(30, 30, 46, 0.9);
+    border-radius: 50%;
+    backdrop-filter: blur(20px);
+}
+
+#workspaces button.urgent {
+    background-color: rgba(243, 139, 168, 0.5);
+    color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(20px);
+}
+
+/* Center clock - pure glass aesthetic */
+#clock {
+    background-color: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 18px;
+    padding: 6px 22px;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 600;
+    font-size: 13px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+#clock:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(30px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Right island modules - extreme glassmorphism */
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#battery,
+#custom-lock {
+    background-color: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 18px;
+    padding: 5px 10px;
+    margin: 0px 3px;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+#pulseaudio:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover {
+    background-color: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+#custom-lock {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 14px;
+}
+
+#custom-lock:hover {
+    background-color: rgba(243, 139, 168, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 6px 25px rgba(243, 139, 168, 0.15);
+    border: 1px solid rgba(243, 139, 168, 0.25);
+}
+
+#battery.charging,
+#battery.plugged {
+    color: rgba(116, 199, 236, 0.9);
+}
+
+#battery.critical:not(.charging) {
+    background-color: rgba(243, 139, 168, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+}
+
+#pulseaudio.muted {
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* State-based styling with glass effects */
+#cpu.warning {
+    background-color: rgba(250, 179, 135, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+}
+
+#cpu.critical {
+    background-color: rgba(243, 139, 168, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    animation: pulse-warning 2s infinite;
+}
+
+#memory.warning {
+    background-color: rgba(250, 179, 135, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+}
+
+#memory.critical {
+    background-color: rgba(243, 139, 168, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+/* Echo Speech-to-Text Module - ultra glass */
+#custom-echo {
+    padding: 5px 10px;
+    margin: 0px 3px;
+    border-radius: 18px;
+    font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.06);
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+#custom-echo.active {
+    background-color: rgba(166, 227, 161, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    animation: pulse 2s infinite;
+    box-shadow: 0 6px 25px rgba(166, 227, 161, 0.15);
+    border: 1px solid rgba(166, 227, 161, 0.25);
+}
+
+#custom-echo.inactive {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(15px);
+}
+
+#custom-echo:hover {
+    background-color: rgba(137, 180, 250, 0.2);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(25px);
+    box-shadow: 0 6px 25px rgba(137, 180, 250, 0.15);
+    border: 1px solid rgba(137, 180, 250, 0.25);
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}

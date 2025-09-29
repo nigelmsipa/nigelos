@@ -94,7 +94,7 @@
     "pulseaudio": {
         "format": "{icon} {volume}%",
         "format-bluetooth": "󰂯 {volume}%",
-        "format-bluetooth-muted": "󰂯",
+        "format-bluetooth-muted": "󰂲",
         "format-muted": "󰖁",
         "format-icons": {
             "headphone": "󰋋",
@@ -115,12 +115,12 @@
     },
 
     "custom/echo": {
-        "exec": "{{HOME}}/nigelos/apps/echo/scripts/echo-gui status",
+        "exec": "{{HOME}}/nigelos/apps/echo/waybar-echo-status.sh",
         "return-type": "json",
         "interval": 5,
-        "on-click": "{{HOME}}/nigelos/apps/echo/scripts/echo-gui toggle",
-        "on-click-right": "{{HOME}}/nigelos/apps/echo/scripts/echo-gui trigger",
-        "on-click-middle": "{{HOME}}/nigelos/apps/echo/scripts/echo-gui gui",
+        "on-click": "{{HOME}}/nigelos/apps/echo/echo-unified toggle",
+        "on-click-right": "{{HOME}}/nigelos/apps/echo/echo_toggle.sh",
+        "on-click-middle": "{{HOME}}/nigelos/apps/echo/echo-unified gui",
         "tooltip": true
     }
 }
