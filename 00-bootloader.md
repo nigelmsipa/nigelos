@@ -403,3 +403,97 @@ quiet splash loglevel=3 plymouth.force-delay=3 reboot=efi btusb.reset=1 btusb.en
 ```
 
 **Result**: GRUB menu is hidden by default, boots immediately after 1 second. Press ESC or SHIFT during boot to access the menu if needed.
+
+## Second Plymouth Attempt - 2025-10-01 (METHODICAL APPROACH)
+
+**Goal:** Install custom Plymouth splash screen with Easter eggs (3-second display) WITHOUT breaking Bluetooth
+
+**Lesson Learned:** Last time we broke Bluetooth due to configuration sprawl. This time: ONE CHANGE AT A TIME with full tracking.
+
+### Pre-Installation Baseline (CRITICAL)
+- **Bluetooth:** hci0 ✅ (NOT hci6)
+- **Hardware:** IMC Networks RTL8822CU (13d3:3549)
+- **Status:** Powered: yes, Working perfectly
+- **Kernel Params:** `quiet splash reboot=efi btusb.reset=1 btusb.enable_autosuspend=0 usbcore.autosuspend=-1`
+- **Backup Created:** `/tmp/grub.backup.20251001`
+
+### Plymouth Theme Design
+**Visual Elements:**
+- Pulsating blue circle (#4d79ff) - scales 1.0 to 1.1
+- "NIGEL OS" logo text with glow
+- Rotating status messages (600ms intervals)
+- Dark gradient background (#1a1a1a → #0d0d0d)
+
+**Easter Eggs (Finity Philosophy):**
+- Status messages include:
+  - "BOUNDARIES CREATE CLARITY"
+  - "FUNCTION BEFORE FLOURISH"
+  - "LESS BUT LASTING"
+  - "THE JOY OF ENOUGH"
+  - "ZERO FRUSTRATION AHEAD"
+  - "GPU ACCELERATION CONFIRMED"
+
+**Bottom-left info:**
+```
+v1.0 | Finity Edition
+Hyprland • RX 6600 • Alt+I Ready
+15,274 chunks • 75+ tok/s
+```
+
+**Bottom-right quote:**
+```
+"Only what we need,
+nothing more."
+— Finity Design System
+```
+
+### Installation Steps Completed
+
+**Step 1:** ✅ Documented baseline Bluetooth state (hci0)
+**Step 2:** ✅ Backed up `/etc/default/grub` to `/tmp/grub.backup.20251001`
+**Step 3:** ✅ Created Plymouth theme files:
+- `/tmp/nigelos-plymouth/nigelos.script` (4.1K) - Animation logic
+- `/tmp/nigelos-plymouth/nigelos.plymouth` (236 bytes) - Theme config
+- `/tmp/nigelos-plymouth/circle.png` (775 bytes) - Blue circle graphic
+
+**Step 4:** ✅ Copied theme to `/usr/share/plymouth/themes/nigelos/`
+**Step 5:** ✅ Verified Bluetooth still hci0 after file copy
+**Step 6:** ✅ Set Plymouth as default: `sudo plymouth-set-default-theme -R nigelos`
+  - Initramfs rebuild completed successfully
+  - No errors during build
+  - Plymouth hook loaded in initramfs
+
+**Step 7:** ⏳ **ABOUT TO REBOOT** - Testing if Bluetooth survives initramfs rebuild
+
+### Next Steps After Reboot
+
+**SUCCESS CRITERIA:**
+```bash
+rfkill list bluetooth  # Should show: 0: hci0: Bluetooth
+bluetoothctl show      # Should show: Powered: yes
+```
+
+**If Bluetooth is hci0:** ✅ Proceed to add 3-second delay
+**If Bluetooth is hci6:** ❌ STOP, rollback immediately
+
+### Rollback Procedure (If Bluetooth Breaks)
+
+```bash
+# 1. Restore GRUB config
+sudo cp /tmp/grub.backup.20251001 /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+# 2. Remove Plymouth theme
+sudo plymouth-set-default-theme -R bgrt
+
+# 3. Reboot and verify Bluetooth returns to hci0
+sudo reboot
+```
+
+### Files Created This Session
+- `/tmp/nigelos-plymouth/` - Theme source files
+- `/tmp/nigelos-splash-preview.html` - HTML preview (for testing design)
+- `/tmp/nigelos-plymouth-install-log.md` - Detailed installation log
+- `/usr/share/plymouth/themes/nigelos/` - Installed theme
+
+**STATUS:** Waiting for reboot test to verify Bluetooth enumeration.
