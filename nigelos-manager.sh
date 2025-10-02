@@ -194,7 +194,7 @@ setup_new_system() {
     log_header "Setting up NigelOS on New System"
 
     log_info "Deploying base configuration..."
-    ./deploy.sh
+    ./scripts/deploy.sh
 
     log_info "Installing packages..."
     "$SCRIPTS_DIR/package-manager.sh" install
@@ -368,7 +368,7 @@ case "${1:-help}" in
         update_system
         ;;
     deploy)
-        ./deploy.sh
+        ./scripts/deploy.sh
         ;;
     setup-ai)
         setup_ai

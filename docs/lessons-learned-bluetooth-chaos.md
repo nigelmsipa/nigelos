@@ -255,3 +255,68 @@ When configuration files are scattered, undocumented, and conflicting:
 **Remember:** The goal isn't to never have problems. The goal is to **maintain a system simple enough that problems are actually solvable.**
 
 **Simplicity is not a luxury. It's a prerequisite for understanding.**
+
+---
+
+## Appendix: Technical Details
+
+### Hardware Configuration
+- **Device**: IMC Networks Bluetooth Radio (USB ID: `13d3:3549`)
+- **Chipset**: Realtek RTL8822CU (uses btrtl module)
+- **Issue**: Controller enumerated as hci6 instead of hci0
+- **OS**: Arch Linux, Kernel 6.16.8-arch3-1
+- **Bootloader**: GRUB 2.13 (UEFI mode)
+- **BlueZ**: 5.84
+
+### Diagnostic Commands
+If you encounter similar issues, use these commands to diagnose:
+
+```bash
+# Check controller status and index
+rfkill list bluetooth
+bluetoothctl show
+ls -la /sys/class/bluetooth/
+
+# Verify kernel parameters actually loaded
+cat /proc/cmdline
+
+# Check for bluetooth errors in boot log
+journalctl -b | grep -E "bluetooth|btusb|hci"
+
+# Verify modules loaded
+lsmod | grep -E "bluetooth|btusb"
+
+# Check USB device detection
+lsusb | grep -i bluetooth
+
+# Check systemd service status
+systemctl status bluetooth
+```
+
+### Working Configuration (Final)
+After all the chaos, this is what actually works:
+
+**GRUB Config** (`/etc/default/grub`):
+```bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash reboot=efi btusb.reset=1 btusb.enable_autosuspend=0 usbcore.autosuspend=-1"
+GRUB_TIMEOUT=1
+GRUB_TIMEOUT_STYLE=hidden
+```
+
+**Bluetooth Config** (`/etc/bluetooth/main.conf`):
+```ini
+[Policy]
+AutoEnable=true  # Line 353
+```
+
+### Files to Remove After Cleanup
+These were created during troubleshooting chaos and should be removed:
+- `~/bluetooth_ultimate_fix.sh`
+- `~/bluetooth_stabilize.sh`
+- `~/fix_grub_bluetooth.sh`
+- `~/fix-bluetooth.sh`
+- `~/bluetooth-fix.md`
+- `~/bluetooth-fix-guide.md`
+- `/etc/modprobe.d/btusb.conf` (if conflicts with kernel params)
+- `/etc/udev/rules.d/99-bt-usb-power.rules` (if redundant)
+- `/etc/modules-load.d/bluetooth.conf` (if redundant)

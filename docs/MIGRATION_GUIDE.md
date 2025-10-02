@@ -15,7 +15,7 @@ cd ~/nigelos
 # On new system:
 tar -xzf nigelos-snapshot-*.tar.gz
 cd nigelos
-./deploy.sh
+./scripts/deploy.sh
 ./scripts/package-manager.sh install
 ./scripts/dotfiles-manager.sh restore
 ```
@@ -25,7 +25,7 @@ cd nigelos
 # On new system
 git clone https://github.com/nigelmsipa/nigelos.git
 cd nigelos
-./deploy.sh
+./scripts/deploy.sh
 ./scripts/package-manager.sh install
 ./scripts/dotfiles-manager.sh restore
 ./scripts/setup-validator.sh full
@@ -98,7 +98,7 @@ git clone https://github.com/nigelmsipa/nigelos.git
 cd nigelos
 
 # Deploy base configuration
-./deploy.sh
+./scripts/deploy.sh
 ```
 
 ### Step 3: Restore System State
@@ -248,7 +248,7 @@ sudo pacman -Scc
    rm -rf ~/.config/hypr ~/.config/waybar ~/.config/kitty
 
    # Re-deploy
-   ./deploy.sh
+   ./scripts/deploy.sh
    ```
 
 3. **Use system snapshot**

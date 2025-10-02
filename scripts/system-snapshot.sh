@@ -284,7 +284,7 @@ EOF
 
 To restore this snapshot on a new system:
 
-1. Install base NigelOS: \`./deploy.sh\`
+1. Install base NigelOS: \`./scripts/deploy.sh\`
 2. Restore packages: \`./scripts/package-manager.sh install\`
 3. Restore dotfiles: \`./scripts/dotfiles-manager.sh restore\`
 4. Review hardware-specific configurations
