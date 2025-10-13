@@ -1,4 +1,4 @@
-# Qutebrowser configuration with transparency and Catppuccin Mocha theme
+# Qutebrowser configuration with transparency and Nord theme
 
 # Load autoconfig (for GUI settings)
 config.load_autoconfig()
@@ -7,101 +7,114 @@ config.load_autoconfig()
 c.fonts.default_family = "JetBrains Mono Nerd Font"
 c.fonts.default_size = "11pt"
 
-# Catppuccin Mocha colors (matching your system)
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
-text = "#cdd6f4"
-subtext0 = "#a6adc8"
-lavender = "#b4befe"
-mauve = "#cba6f7"
-sapphire = "#74c7ec"
-surface0 = "#313244"
-surface1 = "#45475a"
+# Nord color scheme
+# Polar Night (backgrounds)
+nord0 = "#2e3440"  # base background
+nord1 = "#3b4252"  # lighter background
+nord2 = "#434c5e"  # selection background
+nord3 = "#4c566a"  # comments, secondary text
+
+# Snow Storm (foregrounds/text)
+nord4 = "#d8dee9"  # main text
+nord5 = "#e5e9f0"  # brighter text
+nord6 = "#eceff4"  # brightest text
+
+# Frost (blue/cyan accents)
+nord7 = "#8fbcbb"  # cyan
+nord8 = "#88c0d0"  # bright cyan
+nord9 = "#81a1c1"  # blue
+nord10 = "#5e81ac"  # dark blue
+
+# Aurora (colorful highlights)
+nord11 = "#bf616a"  # red
+nord12 = "#d08770"  # orange
+nord13 = "#ebcb8b"  # yellow
+nord14 = "#a3be8c"  # green
+nord15 = "#b48ead"  # purple
 
 # Background for empty pages only (don't force on actual webpages)
 # c.colors.webpage.bg = base
 
 # Completion
-c.colors.completion.fg = text
-c.colors.completion.odd.bg = mantle
-c.colors.completion.even.bg = base
-c.colors.completion.category.fg = lavender
-c.colors.completion.category.bg = crust
-c.colors.completion.category.border.top = crust
-c.colors.completion.category.border.bottom = crust
-c.colors.completion.item.selected.fg = crust
-c.colors.completion.item.selected.bg = mauve
-c.colors.completion.item.selected.border.top = mauve
-c.colors.completion.item.selected.border.bottom = mauve
-c.colors.completion.match.fg = lavender
+c.colors.completion.fg = nord4
+c.colors.completion.odd.bg = nord1
+c.colors.completion.even.bg = nord0
+c.colors.completion.category.fg = nord8
+c.colors.completion.category.bg = nord0
+c.colors.completion.category.border.top = nord0
+c.colors.completion.category.border.bottom = nord0
+c.colors.completion.item.selected.fg = nord6
+c.colors.completion.item.selected.bg = nord9
+c.colors.completion.item.selected.border.top = nord9
+c.colors.completion.item.selected.border.bottom = nord9
+c.colors.completion.match.fg = nord8
 
 # Scrollbar
-c.colors.completion.scrollbar.fg = mauve
-c.colors.completion.scrollbar.bg = crust
+c.colors.completion.scrollbar.fg = nord9
+c.colors.completion.scrollbar.bg = nord0
 
 # Downloads
-c.colors.downloads.bar.bg = base
-c.colors.downloads.start.fg = crust
-c.colors.downloads.start.bg = sapphire
-c.colors.downloads.stop.fg = crust
-c.colors.downloads.stop.bg = mauve
+c.colors.downloads.bar.bg = nord0
+c.colors.downloads.start.fg = nord0
+c.colors.downloads.start.bg = nord8
+c.colors.downloads.stop.fg = nord0
+c.colors.downloads.stop.bg = nord14
 
 # Hints
-c.colors.hints.fg = crust
-c.colors.hints.bg = lavender
-c.colors.hints.match.fg = text
+c.colors.hints.fg = nord0
+c.colors.hints.bg = nord13
+c.colors.hints.match.fg = nord4
 
 # Messages
-c.colors.messages.error.fg = crust
-c.colors.messages.error.bg = "#f38ba8"  # red
-c.colors.messages.error.border = "#f38ba8"
-c.colors.messages.warning.fg = crust
-c.colors.messages.warning.bg = "#fab387"  # peach
-c.colors.messages.warning.border = "#fab387"
-c.colors.messages.info.fg = text
-c.colors.messages.info.bg = base
+c.colors.messages.error.fg = nord0
+c.colors.messages.error.bg = nord11
+c.colors.messages.error.border = nord11
+c.colors.messages.warning.fg = nord0
+c.colors.messages.warning.bg = nord12
+c.colors.messages.warning.border = nord12
+c.colors.messages.info.fg = nord4
+c.colors.messages.info.bg = nord0
 
 # Prompts
-c.colors.prompts.fg = text
-c.colors.prompts.bg = base
-c.colors.prompts.border = mauve
-c.colors.prompts.selected.bg = surface0
-c.colors.prompts.selected.fg = text
+c.colors.prompts.fg = nord4
+c.colors.prompts.bg = nord0
+c.colors.prompts.border = nord9
+c.colors.prompts.selected.bg = nord2
+c.colors.prompts.selected.fg = nord6
 
 # Statusbar
-c.colors.statusbar.normal.fg = text
-c.colors.statusbar.normal.bg = base
-c.colors.statusbar.insert.fg = crust
-c.colors.statusbar.insert.bg = sapphire
-c.colors.statusbar.passthrough.fg = crust
-c.colors.statusbar.passthrough.bg = lavender
-c.colors.statusbar.command.fg = text
-c.colors.statusbar.command.bg = base
-c.colors.statusbar.url.fg = text
-c.colors.statusbar.url.hover.fg = lavender
-c.colors.statusbar.url.success.http.fg = sapphire
-c.colors.statusbar.url.success.https.fg = "#a6e3a1"  # green
-c.colors.statusbar.url.warn.fg = "#fab387"  # peach
+c.colors.statusbar.normal.fg = nord4
+c.colors.statusbar.normal.bg = nord0
+c.colors.statusbar.insert.fg = nord0
+c.colors.statusbar.insert.bg = nord8
+c.colors.statusbar.passthrough.fg = nord0
+c.colors.statusbar.passthrough.bg = nord9
+c.colors.statusbar.command.fg = nord4
+c.colors.statusbar.command.bg = nord0
+c.colors.statusbar.url.fg = nord4
+c.colors.statusbar.url.hover.fg = nord8
+c.colors.statusbar.url.success.http.fg = nord8
+c.colors.statusbar.url.success.https.fg = nord14
+c.colors.statusbar.url.warn.fg = nord13
 
 # Tabs
-c.colors.tabs.bar.bg = crust
-c.colors.tabs.odd.fg = text
-c.colors.tabs.odd.bg = mantle
-c.colors.tabs.even.fg = text
-c.colors.tabs.even.bg = base
-c.colors.tabs.selected.odd.fg = crust
-c.colors.tabs.selected.odd.bg = mauve
-c.colors.tabs.selected.even.fg = crust
-c.colors.tabs.selected.even.bg = mauve
-c.colors.tabs.pinned.odd.fg = text
-c.colors.tabs.pinned.odd.bg = surface0
-c.colors.tabs.pinned.even.fg = text
-c.colors.tabs.pinned.even.bg = surface1
-c.colors.tabs.pinned.selected.odd.fg = crust
-c.colors.tabs.pinned.selected.odd.bg = mauve
-c.colors.tabs.pinned.selected.even.fg = crust
-c.colors.tabs.pinned.selected.even.bg = mauve
+c.colors.tabs.bar.bg = nord0
+c.colors.tabs.odd.fg = nord4
+c.colors.tabs.odd.bg = nord1
+c.colors.tabs.even.fg = nord4
+c.colors.tabs.even.bg = nord0
+c.colors.tabs.selected.odd.fg = nord6
+c.colors.tabs.selected.odd.bg = nord9
+c.colors.tabs.selected.even.fg = nord6
+c.colors.tabs.selected.even.bg = nord9
+c.colors.tabs.pinned.odd.fg = nord4
+c.colors.tabs.pinned.odd.bg = nord2
+c.colors.tabs.pinned.even.fg = nord4
+c.colors.tabs.pinned.even.bg = nord3
+c.colors.tabs.pinned.selected.odd.fg = nord6
+c.colors.tabs.pinned.selected.odd.bg = nord9
+c.colors.tabs.pinned.selected.even.fg = nord6
+c.colors.tabs.pinned.selected.even.bg = nord9
 
 # Window transparency - disabled for now, use compositor opacity rules instead
 # c.window.transparent = True
