@@ -9,7 +9,7 @@
     
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/echo", "pulseaudio", "network", "cpu", "memory", "battery", "custom/lock"],
+    "modules-right": ["custom/echo", "pulseaudio", "bluetooth", "network", "cpu", "memory", "battery", "custom/lock"],
 
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -56,7 +56,7 @@
             "warning": 70,
             "critical": 85
         },
-        "on-click": "gnome-system-monitor"
+        "on-click": "kitty --start-as=fullscreen -e btop"
     },
 
     "memory": {
@@ -67,7 +67,7 @@
             "warning": 80,
             "critical": 90
         },
-        "on-click": "gnome-system-monitor"
+        "on-click": "kitty --start-as=fullscreen -e btop"
     },
 
     "battery": {
@@ -108,6 +108,19 @@
         "on-click": "pavucontrol"
     },
 
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲",
+        "format-off": "󰂲",
+        "format-on": "󰂯",
+        "format-connected": "󰂱 {num_connections}",
+        "tooltip-format": "{status}",
+        "tooltip-format-connected": "{device_alias}",
+        "tooltip-format-enumerate-connected": "{device_alias}",
+        "on-click": "kitty --class=floating -e bluetuith",
+        "on-click-right": "blueberry"
+    },
+
     "custom/lock": {
         "format": "󰌾",
         "tooltip": "Lock Screen",
@@ -115,12 +128,12 @@
     },
 
     "custom/echo": {
-        "exec": "{{HOME}}/nigelos/apps/echo/waybar-echo-status.sh",
+        "exec": "/home/nigel/nigelos/apps/echo/waybar-echo-status.sh",
         "return-type": "json",
         "interval": 5,
-        "on-click": "{{HOME}}/nigelos/apps/echo/echo-unified toggle",
-        "on-click-right": "{{HOME}}/nigelos/apps/echo/echo_toggle.sh",
-        "on-click-middle": "{{HOME}}/nigelos/apps/echo/echo-unified gui",
+        "on-click": "/home/nigel/nigelos/apps/echo/echo-unified toggle",
+        "on-click-right": "/home/nigel/nigelos/apps/echo/echo_toggle.sh",
+        "on-click-middle": "/home/nigel/nigelos/apps/echo/echo-unified gui",
         "tooltip": true
     }
 }

@@ -71,6 +71,7 @@ button:hover {
 
 /* Right island modules - simple transparency with square corners */
 #pulseaudio,
+#bluetooth,
 #network,
 #cpu,
 #memory,
@@ -86,6 +87,7 @@ button:hover {
 }
 
 #pulseaudio:hover,
+#bluetooth:hover,
 #network:hover,
 #cpu:hover,
 #memory:hover,
@@ -117,6 +119,15 @@ button:hover {
 
 #pulseaudio.muted {
     color: rgba(108, 112, 134, 0.7);
+}
+
+#bluetooth.disabled,
+#bluetooth.off {
+    color: rgba(108, 112, 134, 0.7);
+}
+
+#bluetooth.connected {
+    color: rgba(137, 180, 250, 0.9);
 }
 
 /* State-based styling with simple transparency */
