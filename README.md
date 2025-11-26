@@ -119,10 +119,12 @@ Use the **NigelOS Manager** for all operations:
 - `Alt+E` - File manager
 
 ## 📦 Included Applications
-- **Echo AI** - Voice and chat AI assistant
 - **Wallpaper Tools** - Cycling and setting utilities
 - **Smart Configs** - Auto-adapts to your system
 - **Migration Tools** - Zero-frustration system replication
+
+## 🔗 Related Projects
+- **[Echo](https://github.com/nigelmsipa/echo)** - Standalone speech-to-text AI assistant (maintained separately)
 
 ## 📚 Documentation
 
