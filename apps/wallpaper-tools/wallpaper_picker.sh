@@ -92,6 +92,10 @@ set_wallpaper() {
         return 1
     fi
 
+    # Always kill any running video wallpaper first
+    pkill -9 mpvpaper 2>/dev/null || true
+    sleep 0.3
+
     case "$type" in
         image)
             swww-daemon 2>/dev/null || true
@@ -100,8 +104,7 @@ set_wallpaper() {
             notify-send "Wallpaper set" "$filename"
             ;;
         video)
-            pkill -9 mpvpaper 2>/dev/null || true
-            sleep 0.5
+            sleep 0.3
             ~/.local/bin/mpvpaper -f -o "no-audio loop" HDMI-A-1 "$file_path" > /dev/null 2>&1 &
             notify-send "Video wallpaper set" "$filename"
             ;;
