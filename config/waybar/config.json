@@ -113,10 +113,11 @@
         "format-off": " BT Off",
         "format-on": " BT On",
         "format-connected": " BT ({num_connections})",
-        "tooltip-format": "Bluetooth: {status}\nClick to open settings",
+        "tooltip-format": "Bluetooth: {status}\nClick to open bzmenu",
         "tooltip-format-connected": "Bluetooth: {status}\nConnected devices: {num_connections}\n{device_enumerate}",
         "tooltip-format-enumerate-connected": "• {device_alias}",
-        "on-click": "blueman-manager"
+        "on-click": "bzmenu --launcher rofi",
+        "on-click-right": "blueman-manager"
     },
 
     "pulseaudio": {
