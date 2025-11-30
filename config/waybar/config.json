@@ -124,8 +124,8 @@
         "format": " Vol {volume}%",
         "format-muted": " Muted",
         "tooltip": true,
-        "tooltip-format": "Volume: {volume}%\nLeft click: mute/unmute\nRight click: sound settings",
-        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+        "tooltip-format": "Volume: {volume}%\nLeft click: audio menu\nRight click: pavucontrol",
+        "on-click": "pwmenu --launcher rofi",
         "on-click-right": "pavucontrol",
         "scroll-step": 5
     },
