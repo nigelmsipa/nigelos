@@ -125,7 +125,7 @@
         "format-muted": " Muted",
         "tooltip": true,
         "tooltip-format": "Volume: {volume}%\nLeft click: audio menu\nRight click: pavucontrol",
-        "on-click": "setsid -f pwmenu --launcher rofi",
+        "on-click": "setsid -f pwmenu-launcher --launcher rofi",
         "on-click-right": "pavucontrol",
         "scroll-step": 5
     },
