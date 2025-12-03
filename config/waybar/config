@@ -9,7 +9,7 @@
     
     "modules-left": ["hyprland/workspaces"],
     "modules-center": ["clock"],
-    "modules-right": ["custom/echo", "pulseaudio", "bluetooth", "network", "cpu", "memory", "battery", "custom/lock"],
+    "modules-right": ["pulseaudio", "bluetooth", "network", "cpu", "memory", "battery", "custom/lock"],
 
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -87,7 +87,8 @@
         "tooltip-format": "Network: {essid}\nIP: {ipaddr}\nSignal: {signalStrength}%\nFreq: {frequency}MHz\nUp: {bandwidthUpBits} Down: {bandwidthDownBits}",
         "format-linked": "󰈀 {ifname} (No IP)",
         "format-disconnected": "󰖪 Disconnected",
-        "on-click": "nm-connection-editor",
+        "on-click": "rofi-wifi-menu",
+        "on-click-right": "nm-connection-editor",
         "interval": 2
     },
 
@@ -105,7 +106,8 @@
             "car": "󰄋",
             "default": ["󰕿", "󰖀", "󰕾"]
         },
-        "on-click": "pavucontrol"
+        "on-click": "/home/nigel/.local/bin/pwmenu --launcher rofi",
+        "on-click-right": "pavucontrol"
     },
 
     "bluetooth": {
@@ -117,7 +119,7 @@
         "tooltip-format": "{status}",
         "tooltip-format-connected": "{device_alias}",
         "tooltip-format-enumerate-connected": "{device_alias}",
-        "on-click": "kitty --class=floating -e bluetuith",
+        "on-click": "bzmenu --launcher rofi",
         "on-click-right": "blueberry"
     },
 
