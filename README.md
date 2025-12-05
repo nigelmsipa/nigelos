@@ -164,3 +164,5 @@ git pull && ./nigelos-manager.sh restore
 ---
 
 Built with ❤️ for efficient AI-powered workflows and seamless system management.
+
+I was here
