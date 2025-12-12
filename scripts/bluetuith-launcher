@@ -1,0 +1,4 @@
+#!/bin/bash
+# Rofi-style floating bluetuith launcher for Hyprland
+
+hyprctl dispatch exec "[float;center;size 800 600]" "kitty -e bluetuith"
