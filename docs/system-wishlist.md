@@ -13,6 +13,7 @@
   - `Super + D` = Docker (lazydocker)
   - `Super + A` = ChatGPT webapp
   - `Super + /` = Password manager
+  
 
 - **Web App Launcher**: Turn websites into PWA-style apps
   - Detects default browser, launches with `--app` flag
