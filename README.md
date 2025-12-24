@@ -1,169 +1,87 @@
-# NigelOS - AI-Enhanced Hyprland Setup
+# NigelOS
 
-A beautiful, efficient Linux desktop environment with integrated AI capabilities and **zero-frustration system replication**.
+A minimal, thoughtful computing environment built on Arch Linux and Hyprland.
 
-## 🌟 Features
+## Philosophy
 
-### 🖥️ Desktop Environment
-- **Hyprland** - Wayland compositor with smooth animations
-- **Waybar** - Status bar with Catppuccin theme
-- **macOS-style keybindings** - Familiar Alt-key shortcuts
-- **Smart copy/paste** - Context-aware terminal vs app detection
+**Clarity over complexity.** This system exists to support focused work, not to showcase features.
 
-### 🤖 AI Integration
-- **Instant AI Chat** - `Alt+I` launches Ollama Phi3 in terminal
-- **Multiple Models Tested**:
-  - Phi: 75+ tokens/s (speed champion)
-  - Qwen: 57 tokens/s (accuracy champion)
-  - Mistral: 35 tokens/s (balanced)
-- **GPU Accelerated** - Full RX 6600 acceleration confirmed
+The guiding principle: every tool, every configuration, every line of code should have a clear purpose. If it doesn't serve the work, it doesn't belong here.
 
-### 📚 RAG System (Theological Research)
-- **15,274 text chunks** from Ellen White books + KJV Bible
-- **Sub-second search** through entire theological database
-- **GPU-accelerated embeddings** for lightning-fast retrieval
-- **ChromaDB vector database** for semantic search
+## What This Is
 
-### 🔄 **NEW: System Replication**
-- **Package Management** - Complete package backup/restore
-- **Dotfiles Sync** - Automated configuration management
-- **System Snapshots** - Full system state capture
-- **Migration Tools** - One-command system replication
-- **Validation Suite** - Automated setup verification
+A dotfiles repository that tracks my working environment:
+- **Hyprland** compositor with macOS-style keybindings
+- **Waybar** status bar
+- **Dunst** notifications
+- **Rofi** launcher
+- Clean, consistent Catppuccin theming
 
-## 🚀 Quick Start
+This isn't a framework or a distribution. It's a personal workspace, version-controlled.
 
-### Fresh Installation
-```bash
-# Clone the repository
-git clone https://github.com/nigelmsipa/nigelos.git
-cd nigelos
+## Structure
 
-# One-command setup
-./nigelos-manager.sh setup-new
+```
+nigelos/
+├── config/           → System configurations (hypr, waybar, kitty, etc.)
+├── scripts/          → Essential deployment and management tools
+├── docs/
+│   ├── philosophy/   → Design principles and preferences
+│   ├── learning/     → Teaching documents for future reference
+│   └── troubleshooting.md → Brief log of solved problems
+└── README.md         → You are here
 ```
 
-### Migrate from Existing System
-```bash
-# On old system - create migration package
-cd ~/nigelos
-./nigelos-manager.sh prepare
+## Using This
 
-# Transfer nigelos-snapshot-*.tar.gz to new system
-# On new system:
-tar -xzf nigelos-snapshot-*.tar.gz
-cd nigelos
-./nigelos-manager.sh setup-new
+**Deploy configs:**
+```bash
+./scripts/deploy.sh
 ```
 
-## 🎯 Master Control
-
-Use the **NigelOS Manager** for all operations:
-
+**Manage dotfiles:**
 ```bash
-./nigelos-manager.sh help
+./scripts/dotfiles-manager.sh backup   # Save current configs
+./scripts/dotfiles-manager.sh restore  # Restore from repo
 ```
 
-### Key Commands
-- `status` - Show system status
-- `backup` - Create complete system backup
-- `prepare` - Prepare for migration
-- `setup-new` - Setup on new system
-- `validate` - Run full system validation
-- `update` - Update entire system
-- `setup-ai` - Install AI models
-- `setup-dev` - Setup development environment
-
-## 🔧 Advanced Management
-
-### Package Management
+**Manage packages:**
 ```bash
-./scripts/package-manager.sh export    # Backup packages
-./scripts/package-manager.sh install   # Restore packages
-./scripts/package-manager.sh stats     # Show statistics
+./scripts/package-manager.sh export    # Save package list
+./scripts/package-manager.sh install   # Install from list
 ```
 
-### Dotfiles Management
-```bash
-./scripts/dotfiles-manager.sh backup   # Backup dotfiles
-./scripts/dotfiles-manager.sh restore  # Restore dotfiles
-./scripts/dotfiles-manager.sh status   # Show sync status
-```
+## Key Bindings
 
-### System Snapshots
-```bash
-./scripts/system-snapshot.sh create    # Create snapshot
-./scripts/system-snapshot.sh list      # List snapshots
-./scripts/system-snapshot.sh export    # Export for transfer
-```
-
-### Setup Validation
-```bash
-./scripts/setup-validator.sh full      # Complete validation
-./scripts/setup-validator.sh quick     # Quick health check
-./scripts/setup-validator.sh report    # Generate report
-```
-
-## 📋 System Requirements
-- **OS**: Arch Linux (or Arch-based)
-- **GPU**: AMD/NVIDIA (tested on RX 6600)
-- **Memory**: 8GB+ recommended
-- **Storage**: 20GB+ free space
-
-## 🎨 Key Bindings
-- `Alt+I` - **AI Chat** 🧠
 - `Alt+Space` - Application launcher
-- `Alt+C/V` - Smart copy/paste
-- `Alt+1-5` - Workspace switching
+- `Alt+C/V` - Smart copy/paste (adapts to terminal vs. GUI)
 - `Alt+Return` - New terminal
-- `Alt+E` - File manager
+- `Alt+1-5` - Workspace switching
+- `Alt+Q` - Close window
 
-## 📦 Included Applications
-- **Wallpaper Tools** - Cycling and setting utilities
-- **Smart Configs** - Auto-adapts to your system
-- **Migration Tools** - Zero-frustration system replication
+The Alt key serves as the primary modifier, creating a familiar macOS-like feel while maintaining the power of a tiling compositor.
 
-## 🔗 Related Projects
-- **[Echo](https://github.com/nigelmsipa/echo)** - Standalone speech-to-text AI assistant (maintained separately)
+## Design Principles
 
-## 📚 Documentation
+See `docs/philosophy/` for detailed thoughts on:
+- System design (finity-design-principles.md)
+- Personal preferences and workflow (PREFERENCES.md)
+- Future improvements (system-wishlist.md)
 
-- **[Migration Guide](docs/MIGRATION_GUIDE.md)** - Complete system migration
-- **[Preferences](PREFERENCES.md)** - User preferences and workflow
-- **Scripts Documentation** - Individual tool help with `<script> help`
+## Learning Entries
 
-## 🔄 Keeping Systems in Sync
+`docs/learning/` contains teaching documents written to solidify understanding:
+- How Linux actually works (from physics to grandma)
+- Networking fundamentals
+- Arch Linux philosophy and the "DIY cathedral"
+- Python as a scripting superpower
 
-### Regular Backup (Recommended)
-```bash
-# Weekly backup routine
-./nigelos-manager.sh backup
-./nigelos-manager.sh sync
-```
+These exist because explaining something is the best way to understand it.
 
-### Multi-System Sync
-```bash
-# On primary system
-./nigelos-manager.sh backup && ./nigelos-manager.sh sync
+## Troubleshooting
 
-# On other systems
-git pull && ./nigelos-manager.sh restore
-```
-
-## 🆘 Troubleshooting
-
-1. **Run validation**: `./nigelos-manager.sh validate`
-2. **Check the logs**: Generated reports include detailed diagnostics
-3. **Quick fix**: `./nigelos-manager.sh deploy` resets configs
-4. **Emergency restore**: Previous configs are automatically backed up
-
-## 🎉 Success Stories
-
-**"I replicated my entire development environment to a new laptop in under 30 minutes!"** - Zero frustration achieved!
+See `docs/troubleshooting.md` for a brief log of system issues encountered and resolved. Lessons learned, not verbose postmortems.
 
 ---
 
-Built with ❤️ for efficient AI-powered workflows and seamless system management.
-
-I was here
-again 
+Built with intention. Maintained with discipline.
