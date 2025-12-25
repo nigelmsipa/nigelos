@@ -1,5 +1,5 @@
 # NigelOS
-
+the joy of enough 
 A minimal, thoughtful computing environment built on Arch Linux and Hyprland.
 
 ## Philosophy
