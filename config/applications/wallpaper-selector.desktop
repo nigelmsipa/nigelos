@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Wallpaper Selector
+Comment=Select wallpaper from rofi menu
+Exec=/home/nigel/.local/bin/wallpaper-selector
+Icon=preferences-desktop-wallpaper
+Categories=Utility;
+Terminal=false

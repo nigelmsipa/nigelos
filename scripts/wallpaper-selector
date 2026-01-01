@@ -1,0 +1,73 @@
+#!/bin/bash
+# Wallpaper selector using rofi - supports both images and videos
+
+IMAGE_DIR="$HOME/Pictures/Wallpapers"
+VIDEO_DIR="$HOME/Downloads/mpvpaper"
+MONITOR="HDMI-A-1"
+
+# Ensure we have display variables set for Wayland
+export XDG_RUNTIME_DIR="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+export WAYLAND_DISPLAY="${WAYLAND_DISPLAY:-wayland-1}"
+
+# Check if swww daemon is running, start if needed
+if ! pgrep -x swww-daemon > /dev/null; then
+    systemctl --user start swww-daemon.service 2>/dev/null || swww init
+    sleep 0.5
+fi
+
+# Gather images and videos
+shopt -s nullglob nocaseglob
+declare -A ITEMS
+declare -A TYPES
+
+# Add images from wallpaper directory
+if [ -d "$IMAGE_DIR" ]; then
+    cd "$IMAGE_DIR" || exit 1
+    for img in *.{jpg,jpeg,png,webp}; do
+        [ -f "$img" ] && ITEMS["[IMG] $img"]="$IMAGE_DIR/$img" && TYPES["[IMG] $img"]="image"
+    done
+fi
+
+# Add videos from video directory
+if [ -d "$VIDEO_DIR" ]; then
+    cd "$VIDEO_DIR" || exit 1
+    for vid in *.{mp4,mkv,webm}; do
+        [ -f "$vid" ] && ITEMS["[VID] $vid"]="$VIDEO_DIR/$vid" && TYPES["[VID] $vid"]="video"
+    done
+fi
+
+# Create sorted list
+MENU=$(printf '%s\n' "${!ITEMS[@]}" | sort)
+
+# Show rofi menu
+SELECTED=$(echo "$MENU" | rofi -dmenu -i -p "Select Wallpaper (Image/Video)" -theme-str 'window {width: 700px; height: 500px;}')
+
+# Exit if nothing selected
+if [ -z "$SELECTED" ]; then
+    exit 0
+fi
+
+# Get the file path and type
+FILEPATH="${ITEMS[$SELECTED]}"
+FILETYPE="${TYPES[$SELECTED]}"
+
+# Set wallpaper based on type
+if [ "$FILETYPE" = "image" ]; then
+    # Static image wallpaper via swww
+    swww img "$FILEPATH" --transition-type fade --transition-duration 1
+    echo "$FILEPATH" > "$HOME/.current_wallpaper"
+    notify-send "Wallpaper Changed" "Image: ${SELECTED#\[IMG\] }" -t 3000
+elif [ "$FILETYPE" = "video" ]; then
+    # Video wallpaper via mpvpaper
+    if [ -x "$HOME/.local/bin/mpvpaper" ]; then
+        # Kill existing mpvpaper instances
+        pkill -f mpvpaper
+        # Start new video wallpaper
+        "$HOME/.local/bin/mpvpaper" -f -o "no-audio loop" "$MONITOR" "$FILEPATH" &
+        echo "video:$FILEPATH" > "$HOME/.current_wallpaper"
+        notify-send "Wallpaper Changed" "Video: ${SELECTED#\[VID\] }" -t 3000
+    else
+        notify-send "Error" "mpvpaper not found or mpv not installed" -t 5000
+        exit 1
+    fi
+fi

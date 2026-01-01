@@ -60,6 +60,28 @@ cp -r config/kitty/* "$USER_HOME/.config/kitty/" 2>/dev/null || true
 # Rofi config
 cp -r config/rofi/* "$USER_HOME/.config/rofi/" 2>/dev/null || true
 
+# Systemd user services
+echo "⚙️  Setting up systemd user services..."
+mkdir -p "$USER_HOME/.config/systemd/user"
+cp config/systemd/user/*.service "$USER_HOME/.config/systemd/user/" 2>/dev/null || true
+
+# Desktop applications
+echo "📱 Setting up desktop applications..."
+mkdir -p "$USER_HOME/.local/share/applications"
+cp config/applications/*.desktop "$USER_HOME/.local/share/applications/" 2>/dev/null || true
+
+# Scripts
+echo "🔧 Installing scripts..."
+mkdir -p "$USER_HOME/.local/bin"
+cp scripts/wallpaper-selector "$USER_HOME/.local/bin/" 2>/dev/null || true
+chmod +x "$USER_HOME/.local/bin/wallpaper-selector" 2>/dev/null || true
+
+# Enable wallpaper services
+echo "🖼️  Enabling wallpaper services..."
+systemctl --user daemon-reload 2>/dev/null || true
+systemctl --user enable swww-daemon.service 2>/dev/null || true
+systemctl --user enable wallpaper-cycle.service 2>/dev/null || true
+
 # Make apps executable
 echo "🔨 Setting up applications..."
 find apps/ -name "*.sh" -exec chmod +x {} \;
