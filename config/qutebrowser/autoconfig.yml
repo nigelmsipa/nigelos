@@ -7,12 +7,12 @@
 config_version: 2
 settings:
   content.javascript.clipboard:
+    https://chatgpt.com: access-paste
     https://claude.ai: access-paste
     https://gemini.google.com: access-paste
     https://github.com: access-paste
     https://suno.com: access-paste
   content.media.audio_capture:
-    https://chatgpt.com: true
-    https://lovable.dev: true
+    https://grok.com: true
   content.register_protocol_handler:
     https://mail.google.com?extsrc=mailto&url=%25s: true

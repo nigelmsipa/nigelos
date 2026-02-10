@@ -66,7 +66,7 @@ input {
 
     // Focus windows and outputs automatically when moving the mouse into them.
     // Setting max-scroll-amount="0%" makes it work only on windows already fully on screen.
-    // focus-follows-mouse max-scroll-amount="0%"
+    focus-follows-mouse max-scroll-amount="0%"
 }
 
 // You can configure outputs by their name, which you can find
@@ -268,8 +268,13 @@ layout {
 // See the binds section below for more spawn examples.
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
+spawn-at-startup "pipewire"
+spawn-at-startup "wireplumber"
+spawn-at-startup "pipewire-pulse"
 spawn-at-startup "waybar"
 spawn-at-startup "swaybg" "-i" "/home/nigel/Pictures/Green.png" "-m" "fill"
+spawn-at-startup "mako"
+spawn-at-startup "sh" "-c" "/home/nigel/.config/scripts/wako.sh"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -367,9 +372,11 @@ binds {
     Alt+Shift+Slash { show-hotkey-overlay; }
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
-    Alt+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "alacritty"; }
+    Alt+Return hotkey-overlay-title="Open a Terminal: alacritty" { spawn "ghostty"; }
     Alt+Space hotkey-overlay-title="Run an Application: fuzzel" { spawn "fuzzel"; }
-    Alt+E hotkey-overlay-title="Open File Manager: yazi" { spawn "alacritty" "-e" "yazi"; }
+    Alt+E hotkey-overlay-title="Open File Manager: yazi" { spawn "ghostty" "-e" "yazi"; }
+    Alt+B hotkey-overlay-title="Bluetooth: bluetuith" { spawn "ghostty" "-e" "bluetuith"; }
+    Alt+A hotkey-overlay-title="Audio: wiremix" { spawn "ghostty" "-e" "wiremix"; }
     Alt+C hotkey-overlay-title="Copy" { spawn-sh "~/.config/niri/scripts/smart_copy.sh"; }
     Alt+V hotkey-overlay-title="Paste" { spawn-sh "~/.config/niri/scripts/smart_paste.sh"; }
     Super+Alt+L hotkey-overlay-title="Lock the Screen: swaylock" { spawn "swaylock"; }

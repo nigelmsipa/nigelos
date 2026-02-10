@@ -106,3 +106,10 @@ c.tabs.padding = {"top": 6, "right": 8, "bottom": 6, "left": 8}
 # Keybindings
 config.bind(',gt', 'spawn --userscript get_transcript')
 config.bind(',gh', 'hint links spawn --userscript get_transcript')
+
+
+# Microphone access
+config.set('content.media.audio_capture', True, 'https://chatgpt.com')
+config.set('content.media.audio_capture', True, 'https://claude.ai')
+config.set('content.media.audio_capture', True, 'https://gemini.google.com')
+config.set('content.media.audio_capture', True, 'https://grok.com')
