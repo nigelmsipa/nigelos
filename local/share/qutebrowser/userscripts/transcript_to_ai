@@ -1,0 +1,185 @@
+#!/usr/bin/env python3
+"""
+Qutebrowser Userscript: Transcript to AI Chat
+Grabs YouTube transcript, copies to clipboard, spawns a new qutebrowser
+instance with the chosen AI site. Niri auto-tiles it side-by-side.
+
+Usage (via qutebrowser keybindings):
+    ,gg  -> Grok
+    ,gc  -> Claude
+    ,go  -> ChatGPT
+    ,ge  -> Gemini
+
+The AI site is passed as an argument to the userscript.
+"""
+
+import os
+import sys
+import subprocess
+import tempfile
+import shutil
+from pathlib import Path
+
+YTDLP_BIN = "yt-dlp"
+LANGUAGES = "en,en-US,en-GB"
+
+AI_SITES = {
+    "grok": "https://grok.com",
+    "claude": "https://claude.ai/new",
+    "chatgpt": "https://chatgpt.com",
+    "gemini": "https://gemini.google.com/app",
+}
+
+DEFAULT_AI = "grok"
+
+
+def qute_command(cmd: str):
+    fifo_path = os.environ.get("QUTE_FIFO")
+    if not fifo_path:
+        print(f"[QUTE] {cmd}", file=sys.stderr)
+        return
+    try:
+        with open(fifo_path, "w") as fifo:
+            fifo.write(cmd + "\n")
+    except Exception as e:
+        print(f"Error writing to FIFO: {e}", file=sys.stderr)
+
+
+def notify(message: str, level: str = "info"):
+    qute_command(f"message-{level} '{message}'")
+
+
+def check_dependencies():
+    if not shutil.which(YTDLP_BIN):
+        notify(f"Error: {YTDLP_BIN} not found in PATH.", "error")
+        sys.exit(1)
+    try:
+        import webvtt  # noqa: F401
+    except ImportError:
+        notify("Error: webvtt-py module missing. pip install webvtt-py", "error")
+        sys.exit(1)
+
+
+def fetch_transcript(url: str, working_dir: str) -> Path:
+    output_base = os.path.join(working_dir, "transcript")
+
+    cmd = [
+        YTDLP_BIN,
+        "--extractor-args", "youtube:player_client=android",
+        "--write-subs",
+        "--write-auto-subs",
+        "--sub-langs", LANGUAGES,
+        "--sub-format", "vtt",
+        "--skip-download",
+        "-o", output_base,
+        "--no-playlist",
+        "--quiet",
+        "--no-warnings",
+        url,
+    ]
+
+    notify("Fetching transcript...")
+
+    result = subprocess.run(cmd, capture_output=True, text=True)
+
+    if result.returncode != 0:
+        err = result.stderr.lower()
+        if "sign in" in err:
+            raise RuntimeError("Age-gated content. Cookies needed.")
+        elif "video unavailable" in err:
+            raise RuntimeError("Video unavailable or private.")
+        else:
+            raise RuntimeError(f"yt-dlp failed: {result.stderr[:100]}")
+
+    files = list(Path(working_dir).glob("transcript*.vtt"))
+    if not files:
+        raise RuntimeError("No subtitles found for this video.")
+
+    return files[0]
+
+
+def clean_vtt(vtt_file: Path) -> str:
+    import webvtt
+
+    lines = []
+    seen = set()
+
+    for caption in webvtt.read(str(vtt_file)):
+        text = caption.text.replace("\n", " ").strip()
+        if not text or (text.startswith("[") and text.endswith("]")):
+            continue
+        if text not in seen:
+            lines.append(text)
+            seen.add(text)
+
+    return " ".join(lines)
+
+
+def copy_to_clipboard(text: str):
+    if shutil.which("wl-copy"):
+        cmd = ["wl-copy"]
+    elif shutil.which("xclip"):
+        cmd = ["xclip", "-selection", "clipboard"]
+    elif shutil.which("pbcopy"):
+        cmd = ["pbcopy"]
+    else:
+        raise RuntimeError("No clipboard utility found.")
+
+    subprocess.run(cmd, input=text, text=True, check=True)
+
+
+def spawn_ai_window(ai_name: str):
+    url = AI_SITES.get(ai_name, AI_SITES[DEFAULT_AI])
+    notify(f"Opening {ai_name.capitalize()} in new window...")
+    subprocess.Popen(
+        ["qutebrowser", "--target", "window", url],
+        start_new_session=True,
+    )
+
+
+def get_ai_choice() -> str:
+    if len(sys.argv) > 1:
+        choice = sys.argv[1].lower()
+        if choice in AI_SITES:
+            return choice
+
+    return DEFAULT_AI
+
+
+def main():
+    check_dependencies()
+
+    url = os.environ.get("QUTE_URL")
+    if not url:
+        notify("Error: Not running on a YouTube page.", "error")
+        sys.exit(1)
+
+    if "youtube.com" not in url and "youtu.be" not in url:
+        notify("Error: Not a YouTube URL.", "error")
+        sys.exit(1)
+
+    ai_choice = get_ai_choice()
+
+    try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            vtt_path = fetch_transcript(url, tmpdir)
+            clean_text = clean_vtt(vtt_path)
+
+            if not clean_text:
+                raise RuntimeError("Transcript empty.")
+
+            copy_to_clipboard(clean_text)
+
+            preview = (clean_text[:50] + "...") if len(clean_text) > 50 else clean_text
+            notify(f"Transcript copied! ({len(clean_text)} chars) {preview}")
+
+            spawn_ai_window(ai_choice)
+
+    except Exception as e:
+        notify(f"Error: {str(e)}", "error")
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+
+
+if __name__ == "__main__":
+    main()

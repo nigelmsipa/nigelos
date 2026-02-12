@@ -1,0 +1,136 @@
+#!/usr/bin/env python3
+"""
+Qutebrowser Userscript: YouTube Transcript Extractor (2026 Edition)
+Uses yt-dlp with Android client simulation to bypass SABR protocol.
+"""
+
+import os
+import sys
+import subprocess
+import tempfile
+import shutil
+from pathlib import Path
+
+YTDLP_BIN = "yt-dlp"
+LANGUAGES = "en,en-US,en-GB"
+
+def qute_command(cmd: str):
+    fifo_path = os.environ.get("QUTE_FIFO")
+    if not fifo_path:
+        print(f"[QUTE] {cmd}", file=sys.stderr)
+        return
+    try:
+        with open(fifo_path, "w") as fifo:
+            fifo.write(cmd + "\n")
+    except Exception as e:
+        print(f"Error writing to FIFO: {e}", file=sys.stderr)
+
+def notify(message: str, level: str = "info"):
+    qute_command(f"message-{level} '{message}'")
+
+def check_dependencies():
+    if not shutil.which(YTDLP_BIN):
+        notify(f"Error: {YTDLP_BIN} not found in PATH.", "error")
+        sys.exit(1)
+    try:
+        import webvtt
+    except ImportError:
+        notify("Error: webvtt-py module missing. pip install webvtt-py", "error")
+        sys.exit(1)
+
+def fetch_transcript(url: str, working_dir: str) -> Path:
+    output_base = os.path.join(working_dir, "transcript")
+    
+    cmd = [
+        YTDLP_BIN,
+        "--extractor-args", "youtube:player_client=android",
+        "--write-subs",
+        "--write-auto-subs",
+        "--sub-langs", LANGUAGES,
+        "--sub-format", "vtt",
+        "--skip-download",
+        "-o", output_base,
+        "--no-playlist",
+        "--quiet",
+        "--no-warnings",
+        url
+    ]
+
+    notify("Fetching transcript...")
+    
+    result = subprocess.run(cmd, capture_output=True, text=True)
+    
+    if result.returncode != 0:
+        err = result.stderr.lower()
+        if "sign in" in err:
+            raise RuntimeError("Age-gated content. Cookies needed.")
+        elif "video unavailable" in err:
+            raise RuntimeError("Video unavailable or private.")
+        else:
+            raise RuntimeError(f"yt-dlp failed: {result.stderr[:100]}")
+
+    files = list(Path(working_dir).glob("transcript*.vtt"))
+    if not files:
+        raise RuntimeError("No subtitles found for this video.")
+    
+    return files[0]
+
+def clean_vtt(vtt_file: Path) -> str:
+    import webvtt
+    
+    lines = []
+    seen = set()
+    
+    for caption in webvtt.read(str(vtt_file)):
+        text = caption.text.replace("\n", " ").strip()
+        if not text or (text.startswith("[") and text.endswith("]")):
+            continue
+        if text not in seen:
+            lines.append(text)
+            seen.add(text)
+            
+    return " ".join(lines)
+
+def copy_to_clipboard(text: str):
+    if shutil.which("wl-copy"):
+        cmd = ["wl-copy"]
+    elif shutil.which("xclip"):
+        cmd = ["xclip", "-selection", "clipboard"]
+    elif shutil.which("pbcopy"):
+        cmd = ["pbcopy"]
+    else:
+        raise RuntimeError("No clipboard utility found.")
+        
+    subprocess.run(cmd, input=text, text=True, check=True)
+
+def main():
+    check_dependencies()
+    
+    url = os.environ.get("QUTE_URL")
+    if not url:
+        if len(sys.argv) > 1:
+            url = sys.argv[1]
+        else:
+            print("Usage: Run from Qutebrowser or provide URL as arg.")
+            sys.exit(1)
+
+    try:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            vtt_path = fetch_transcript(url, tmpdir)
+            clean_text = clean_vtt(vtt_path)
+            
+            if not clean_text:
+                raise RuntimeError("Transcript empty.")
+                
+            copy_to_clipboard(clean_text)
+            
+            preview = (clean_text[:50] + '...') if len(clean_text) > 50 else clean_text
+            notify(f"Copied: {preview}")
+            
+    except Exception as e:
+        notify(f"Error: {str(e)}", "error")
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+
+if __name__ == "__main__":
+    main()
