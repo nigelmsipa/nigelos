@@ -108,8 +108,18 @@ config.bind(',gt', 'spawn --userscript get_transcript')
 config.bind(',gh', 'hint links spawn --userscript get_transcript')
 
 
+# Transcript to AI - grab transcript and open AI in new window (Niri tiles it)
+config.bind(',gg', 'spawn --userscript transcript_to_ai grok')
+config.bind(',gc', 'spawn --userscript transcript_to_ai claude')
+config.bind(',go', 'spawn --userscript transcript_to_ai chatgpt')
+config.bind(',ge', 'spawn --userscript transcript_to_ai gemini')
+
+
 # Microphone access
 config.set('content.media.audio_capture', True, 'https://chatgpt.com')
 config.set('content.media.audio_capture', True, 'https://claude.ai')
 config.set('content.media.audio_capture', True, 'https://gemini.google.com')
 config.set('content.media.audio_capture', True, 'https://grok.com')
+
+# Clipboard access for AI sites (needed for auto-paste greasemonkey script)
+config.set('content.javascript.clipboard', 'access-paste', 'https://grok.com')
