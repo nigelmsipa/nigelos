@@ -3,7 +3,7 @@
 app=$(niri msg focused-window 2>/dev/null | grep -oP 'app_id: "\K[^"]+')
 
 # Check if it's a terminal
-if echo "$app" | grep -qiE 'Alacritty|kitty|foot|wezterm|gnome-terminal|konsole'; then
+if echo "$app" | grep -qiE 'Alacritty|kitty|foot|wezterm|gnome-terminal|konsole|com.mitchellh.ghostty'; then
     # Send Ctrl+Shift+V for terminals
     wtype -M ctrl -M shift -k v
 else
