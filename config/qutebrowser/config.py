@@ -123,3 +123,25 @@ config.set('content.media.audio_capture', True, 'https://grok.com')
 
 # Clipboard access for AI sites (needed for auto-paste greasemonkey script)
 config.set('content.javascript.clipboard', 'access-paste', 'https://grok.com')
+
+
+# Quick navigation aliases
+# :name opens in current tab, :n<name> opens in new tab
+c.aliases.update({
+    'you': 'open https://youtube.com',
+    'nyou': 'open -t https://youtube.com',
+    'chat': 'open https://chatgpt.com',
+    'nchat': 'open -t https://chatgpt.com',
+    'claude': 'open https://claude.ai',
+    'nclaude': 'open -t https://claude.ai',
+    'grok': 'open https://grok.com',
+    'ngrok': 'open -t https://grok.com',
+    'gem': 'open https://gemini.google.com',
+    'ngem': 'open -t https://gemini.google.com',
+    'mail': 'open https://mail.google.com',
+    'nmail': 'open -t https://mail.google.com',
+})
+
+
+# Confirm before quitting (don't close my tabs!)
+c.confirm_quit = ['multiple-tabs', 'downloads']
