@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=bluetuith
+Comment=TUI-based Bluetooth manager
+Exec=sh -c 'hyprctl dispatch exec "[float;center;size 800 600]" "kitty -e bluetuith"'
+Icon=bluetooth
+Terminal=false
+Type=Application
+Categories=System;Settings;
+Keywords=bluetooth;bt;
+StartupNotify=true

@@ -1,0 +1,10 @@
+[manager]
+keymap = [
+  { on = [ "g", "h" ], run = "cd ~", desc = "Go to home" },
+  { on = [ "g", "c" ], run = "cd ~/.config", desc = "Go to config" },
+  { on = [ "g", "d" ], run = "cd ~/Downloads", desc = "Go to downloads" },
+  { on = [ "g", "t" ], run = "cd /tmp", desc = "Go to tmp" },
+  { on = [ "c", "m" ], run = "plugin chmod", desc = "Chmod selected files" },
+  { on = [ "T" ], run = "plugin --sync max-preview", desc = "Maximize preview" },
+  { on = [ "f" ], run = "plugin jump", desc = "Jump to directory" },
+]

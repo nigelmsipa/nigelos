@@ -1,0 +1,34 @@
+[[plugin.deps]]
+use = "yazi-rs/plugins:git"
+rev = "230b9c6"
+hash = "270915fa8282a19908449530ff66f7e2"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:jump"
+rev = "230b9c6"
+hash = "99aa06d3014798d86001c324468d497f"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:chmod"
+rev = "230b9c6"
+hash = "8da0b15a97b5dfd13941d1ecc617ac7c"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:diff"
+rev = "230b9c6"
+hash = "2f08b8249b57737e7257298a3b2a2edc"
+
+[[plugin.deps]]
+use = "yazi-rs/plugins:archive"
+rev = "230b9c6"
+hash = "99aa06d3014798d86001c324468d497f"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "9e053d0"
+hash = "8eabb4e88096f10905a6df62cfaadbf4"
+
+[[flavor.deps]]
+use = "bennyyip/gruvbox-dark"
+rev = "619fdc5"
+hash = "d4c7003ec6dc4efd5d3a050d5c2f2575"

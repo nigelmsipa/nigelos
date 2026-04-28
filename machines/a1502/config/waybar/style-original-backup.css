@@ -1,0 +1,183 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12px;
+    min-height: 0;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+}
+
+/* Left island - fully rounded */
+#workspaces {
+    background-color: rgba(30, 30, 46, 0.9);
+    border-radius: 15px;
+    padding: 5px 15px;
+    margin: 0;
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    margin: 0px 2px;
+    background-color: transparent;
+    color: #cdd6f4;
+    border-radius: 50%;
+    min-width: 0;
+    font-size: 12px;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#workspaces button.active {
+    background-color: white;
+    color: #1e1e2e;
+    border-radius: 50%;
+}
+
+#workspaces button.urgent {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+
+/* Center notch - smaller pill shape */
+#clock {
+    background-color: rgba(30, 30, 46, 0.9);
+    border-radius: 15px;
+    padding: 6px 22px;
+    color: #cdd6f4;
+    font-weight: 600;
+    font-size: 13px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#clock:hover {
+    background-color: rgba(30, 30, 46, 0.95);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Right island - fully rounded with all your modules */
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#battery,
+#custom-lock {
+    background-color: rgba(30, 30, 46, 0.9);
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 0px 3px;
+    color: #cdd6f4;
+    font-size: 12px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+#pulseaudio:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover {
+    background-color: rgba(30, 30, 46, 0.95);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+#custom-lock {
+    color: #cdd6f4;
+    font-size: 14px;
+}
+
+#custom-lock:hover {
+    background-color: rgba(243, 139, 168, 0.8);
+    color: #1e1e2e;
+    box-shadow: 0 3px 10px rgba(243, 139, 168, 0.3);
+}
+
+#battery.charging,
+#battery.plugged {
+    color: #74c7ec;
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+}
+
+#pulseaudio.muted {
+    color: #6c7086;
+}
+
+/* State-based styling for system resources */
+#cpu.warning {
+    background-color: rgba(250, 179, 135, 0.8);
+    color: #1e1e2e;
+}
+
+#cpu.critical {
+    background-color: rgba(243, 139, 168, 0.8);
+    color: #1e1e2e;
+    animation: pulse-warning 2s infinite;
+}
+
+#memory.warning {
+    background-color: rgba(250, 179, 135, 0.8);
+    color: #1e1e2e;
+}
+
+#memory.critical {
+    background-color: rgba(243, 139, 168, 0.8);
+    color: #1e1e2e;
+    animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+    0% { opacity: 1; }
+    50% { opacity: 0.8; }
+    100% { opacity: 1; }
+}
+
+/* Echo Speech-to-Text Module */
+#custom-echo {
+    padding: 5px 10px;
+    margin: 0px 3px;
+    border-radius: 15px;
+    font-size: 16px;
+    background-color: rgba(30, 30, 46, 0.9);
+    color: #cdd6f4;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+#custom-echo.active {
+    background-color: #a6e3a1;
+    color: #1e1e2e;
+    animation: pulse 2s infinite;
+    box-shadow: 0 2px 10px rgba(166, 227, 161, 0.3);
+}
+
+#custom-echo.inactive {
+    background-color: rgba(108, 112, 134, 0.5);
+    color: #6c7086;
+}
+
+#custom-echo:hover {
+    background-color: #89b4fa;
+    color: #1e1e2e;
+    box-shadow: 0 3px 10px rgba(137, 180, 250, 0.3);
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}

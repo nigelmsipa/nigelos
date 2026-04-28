@@ -1,0 +1,211 @@
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 12px;
+    min-height: 0;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+window#waybar {
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 10px;
+}
+
+button {
+    border: none;
+    border-radius: 0;
+}
+
+button:hover {
+    background: inherit;
+}
+
+/* Left island - super translucent with glass effect */
+#workspaces {
+    background-color: rgba(30, 30, 46, 0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 5px 15px;
+    margin: 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#workspaces button {
+    padding: 0px 5px;
+    margin: 0px 2px;
+    background-color: transparent;
+    color: rgba(205, 214, 244, 0.9);
+    border-radius: 50%;
+    min-width: 0;
+    font-size: 12px;
+}
+
+#workspaces button:hover {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+}
+
+#workspaces button.active {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #1e1e2e;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+}
+
+#workspaces button.urgent {
+    background-color: rgba(243, 139, 168, 0.7);
+    color: #1e1e2e;
+    backdrop-filter: blur(10px);
+}
+
+/* Center clock - glassy translucent pill */
+#clock {
+    background-color: rgba(30, 30, 46, 0.3);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 6px 22px;
+    color: rgba(205, 214, 244, 0.95);
+    font-weight: 600;
+    font-size: 13px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+#clock:hover {
+    background-color: rgba(30, 30, 46, 0.5);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Right island modules - ultra glassy */
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#battery,
+#custom-lock {
+    background-color: rgba(30, 30, 46, 0.25);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 0px 3px;
+    color: rgba(205, 214, 244, 0.9);
+    font-size: 12px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+#pulseaudio:hover,
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#battery:hover {
+    background-color: rgba(30, 30, 46, 0.4);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+#custom-lock {
+    color: rgba(205, 214, 244, 0.9);
+    font-size: 14px;
+}
+
+#custom-lock:hover {
+    background-color: rgba(243, 139, 168, 0.4);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(243, 139, 168, 0.2);
+    border: 1px solid rgba(243, 139, 168, 0.3);
+}
+
+#battery.charging,
+#battery.plugged {
+    color: rgba(116, 199, 236, 0.9);
+}
+
+#battery.critical:not(.charging) {
+    background-color: rgba(243, 139, 168, 0.4);
+    color: #ffffff;
+    backdrop-filter: blur(15px);
+}
+
+#pulseaudio.muted {
+    color: rgba(108, 112, 134, 0.7);
+}
+
+/* State-based styling with transparency */
+#cpu.warning {
+    background-color: rgba(250, 179, 135, 0.4);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+}
+
+#cpu.critical {
+    background-color: rgba(243, 139, 168, 0.4);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    animation: pulse-warning 2s infinite;
+}
+
+#memory.warning {
+    background-color: rgba(250, 179, 135, 0.4);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+}
+
+#memory.critical {
+    background-color: rgba(243, 139, 168, 0.4);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    animation: pulse-warning 2s infinite;
+}
+
+@keyframes pulse-warning {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* Echo Speech-to-Text Module - glassy version */
+#custom-echo {
+    padding: 5px 10px;
+    margin: 0px 3px;
+    border-radius: 15px;
+    font-size: 16px;
+    background-color: rgba(30, 30, 46, 0.25);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(205, 214, 244, 0.9);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+#custom-echo.active {
+    background-color: rgba(166, 227, 161, 0.4);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    animation: pulse 2s infinite;
+    box-shadow: 0 4px 15px rgba(166, 227, 161, 0.2);
+    border: 1px solid rgba(166, 227, 161, 0.3);
+}
+
+#custom-echo.inactive {
+    background-color: rgba(108, 112, 134, 0.2);
+    color: rgba(108, 112, 134, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+#custom-echo:hover {
+    background-color: rgba(137, 180, 250, 0.4);
+    color: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 15px rgba(137, 180, 250, 0.2);
+    border: 1px solid rgba(137, 180, 250, 0.3);
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
