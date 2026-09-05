@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Fix PipeWire
+Exec=/bin/bash /home/nigel/.local/bin/fix-pipewire.sh
+X-GNOME-Autostart-enabled=true
+NoDisplay=true

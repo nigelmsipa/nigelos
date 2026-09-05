@@ -1,0 +1,11 @@
+[Unit]
+Description=Clean up stale PipeWire lock files before PipeWire starts
+Before=pipewire.socket pipewire-pulse.socket
+DefaultDependencies=no
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'rm -f %t/pipewire-0 %t/pipewire-0.lock %t/pipewire-0-manager %t/pipewire-0-manager.lock'
+
+[Install]
+WantedBy=default.target

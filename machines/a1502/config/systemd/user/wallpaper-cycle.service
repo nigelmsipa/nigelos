@@ -1,0 +1,13 @@
+[Unit]
+Description=Cycle wallpapers every 7 minutes
+After=graphical-session.target swww-daemon.service
+Requires=swww-daemon.service
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/wallpaper-cycle --dir %h/Pictures/Wallpapers --interval 420
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=default.target
