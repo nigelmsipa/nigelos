@@ -28,6 +28,18 @@ can be restored (or referenced) after hardware/OS changes.
 (`chromium`, `google-chrome-for-testing`, `seraph-chromium-profile`),
 `Paper` (157MB of personal notes), `pulse`/`dconf` (runtime state, not config).
 
+## Hardware notes
+
+**Battery (replacement pack) — died 2026-08-22, replaced 2026-09-05.**
+Cause: let it fully discharge to 0% / die completely — that's what killed it.
+Lithium packs can take permanent capacity loss or fail to recover from a full
+deep discharge, so don't let the pack hit 0% on the next one either.
+
+(There was also an unrelated software red herring during diagnosis: CachyOS's
+kernel briefly carried an experimental `macsmc-*` driver series meant for
+Apple Silicon that misbound on this Intel Mac and spammed I/O errors —
+fixed upstream, unrelated to why the battery itself died.)
+
 ## Restoring
 
 There's no automated restore script for this snapshot specifically — copy
